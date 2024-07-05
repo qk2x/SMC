@@ -49,8 +49,10 @@ namespace Game.Map
 			//先算有S,A,B得概率
 			if (r > 90)
 			{
-								
+									
 			}
+
+			return default;
 		}
 	}
 
