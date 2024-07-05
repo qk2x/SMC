@@ -461,5 +461,10 @@ namespace Framework.Misc
                 dict.Clear();
             }
         }
+
+        public static Color ToUnityColor(this System.Drawing.Color color)
+        {
+            return new Color32(color.R, color.G, color.B, color.A);
+        }
     }
 }
