@@ -68,7 +68,7 @@ namespace Game.Map
                 Quaternion.identity, transform);
             
             hex.SetCoordinate(x, y);
-            
+            hex.SetResData(BigMap.RandomBigMapResData());
             hexMap.Add(new ValueTuple<int, int>(x, y), hex);
         }
 
@@ -92,6 +92,11 @@ namespace Game.Map
             }
         }
 
+        /// <summary>
+        /// 显示用排序
+        /// </summary>
+        /// <param name="et"></param>
+        /// <returns></returns>
         public float GetEntityShowZ(BigMapEntity.BigMapEntityType et)
         {
             switch (et)

@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 7183244549918123137}
   - component: {fileID: 6280606782050747512}
   m_Layer: 0
-  m_Name: HQ
+  m_Name: BlockHQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

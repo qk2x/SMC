@@ -1,7 +1,10 @@
 ﻿using Framework.BUI;
 using Framework.Misc;
+using Framework.Qath;
 using Game.Map.Entity;
+using TMPro;
 using UnityEngine;
+using UnityEngine.U2D;
 
 namespace Game.Map
 {
@@ -28,6 +31,10 @@ namespace Game.Map
 			
 		}
 
+		public void OnHexClick()
+		{
+		}
+
 		public static Vector3 GetPos(int m, int n, float z = 0)
 		{
 			var px = m * E;
@@ -37,22 +44,22 @@ namespace Game.Map
             
 			return new Vector3(px, py, z);
 		}
-
-		public void OnHexClick()
+		
+		public static BigMapResData RandomBigMapResData(int calTimes = 100)
 		{
-		}
+			BigMapResData data = new BigMapResData();
 
-		public BigMapResData GetBigMapResData()
-		{
-			float r = Random.Range(1f, 100f);
-
-			//先算有S,A,B得概率
-			if (r > 90)
+			if (ProbabilityMath.RandomFloat(0, 1) > 0.9)
 			{
-									
+				for (int i = 0; i < calTimes; ++i)
+				{
+					var key = ProbabilityMath.RandomFloat(0, 1);
+					var val = key * key * key;
+					data.AddRandom(val);
+				}
 			}
 
-			return default;
+			return data;
 		}
 	}
 
