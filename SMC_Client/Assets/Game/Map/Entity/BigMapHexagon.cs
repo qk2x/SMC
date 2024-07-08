@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Framework.Misc;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Map.Entity
 {
@@ -31,7 +30,7 @@ namespace Game.Map.Entity
         {
             m_MapResData = resData;
 
-            var color = resData.GetColor();
+            var color = BigMapColor.GetColor(resData);
             if (color != Color.clear)
             {
                 mainSprite.color = color;
@@ -51,6 +50,11 @@ namespace Game.Map.Entity
         public override BigMapEntityType GetEntityType()
         {
             return BigMapEntityType.MapHex;
+        }
+
+        public void SetInteractive(bool on)
+        {
+            
         }
     }
 }

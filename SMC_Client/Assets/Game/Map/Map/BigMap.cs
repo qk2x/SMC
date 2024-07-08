@@ -2,9 +2,7 @@
 using Framework.Misc;
 using Framework.Qath;
 using Game.Map.Entity;
-using TMPro;
 using UnityEngine;
-using UnityEngine.U2D;
 
 namespace Game.Map
 {

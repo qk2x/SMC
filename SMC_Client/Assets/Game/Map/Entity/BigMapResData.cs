@@ -12,7 +12,7 @@ namespace Game.Map.Entity
 		private int m_Mb;
 		//private int Mc;
 
-		private int Total => m_Ms + m_Ma + m_Mb;
+		public int Total => m_Ms + m_Ma + m_Mb;
 		
 		public int GetResCount(ResType rt)
 		{
@@ -56,17 +56,7 @@ namespace Game.Map.Entity
 			}
 		}
 
-		public Color GetColor()
-		{
-			if (Total == 0)
-			{
-				return Color.clear;
-			}
-			else
-			{
-				return Color.grey;
-			}
-		}
+
 
 		public override string ToString()
 		{

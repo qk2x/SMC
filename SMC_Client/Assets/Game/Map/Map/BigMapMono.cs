@@ -17,7 +17,7 @@ namespace Game.Map
 
         void Start()
         {
-            CreateBigMap(40, 20);
+            CreateBigMap(10, 5);
             CreateHq(0, 0);
         }
 
