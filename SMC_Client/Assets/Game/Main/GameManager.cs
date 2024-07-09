@@ -5,9 +5,9 @@ namespace Game.Manager
 {
 	public class GameManager : SingletonUnity<GameManager>, IRestartComponent
 	{
-		void Awake()
+		void Start()
 		{
-			
+			InitGame();
 		}
 
 		void InitGame()

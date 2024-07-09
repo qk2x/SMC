@@ -15,6 +15,13 @@ namespace Game.Map
 
         private Dictionary<int, BigMapHq> hqMap;
 
+        public static BigMapMono Instance { get; private set; }
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         void Start()
         {
             CreateBigMap(10, 5);
@@ -69,6 +76,8 @@ namespace Game.Map
             
             hex.SetCoordinate(x, y);
             hex.SetResData(BigMap.RandomBigMapResData());
+            hex.SetInteractive(false);
+            
             hexMap.Add(new ValueTuple<int, int>(x, y), hex);
         }
 
@@ -87,7 +96,7 @@ namespace Game.Map
                     var hex  = hitCollider.GetComponent<BigMapHexagon>();
                     hex.OnClick();
 
-                    BigMap.Instance.OnHexClick();
+                    BigMap.Instance.OnHexClick(hex);
                 }
             }
         }
@@ -110,6 +119,12 @@ namespace Game.Map
             DLog.Error($"无深度类型:{et}");
             
             return 999;
+        }
+
+        public BigMapHexagon GetHexagonByCoordinate(int x, int y)
+        {
+            hexMap.TryGetValue((x, y), out var hex);
+            return hex;
         }
     }
 }

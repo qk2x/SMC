@@ -9,26 +9,28 @@ namespace Game.Map.Entity
     {
         [SerializeField] private TextMeshPro testTxt;
         [SerializeField] private SpriteRenderer mainSprite;
+        [SerializeField] private SpriteRenderer subSprite;
         
         private List<BigMapEntity> m_EntityHas = new List<BigMapEntity>(0);
-        private int m_Cx = 0;
-        private int m_Cy = 0;
-
-        private BigMapResData m_MapResData;
+        public int Cx { get; private set; }
+        public int Cy { get; private set; }
+        
+        public BigMapResData MapResData { get; private set; }
+        public bool IsInteractive { get; private set; }
         
         public void SetCoordinate(int x, int y)
         {
-            m_Cx = x;
-            m_Cy = y;
+            Cx = x;
+            Cy = y;
 
-            testTxt.text = $"({m_Cx}, {m_Cy})";
-            testTxt.gameObject.SetActive(false);
-            name = $"HEX:({m_Cx}, {m_Cy})";
+            testTxt.text = $"({Cx}, {Cy})";
+            //testTxt.gameObject.SetActive(false);
+            name = $"HEX:({Cx}, {Cy})";
         }
 
         public void SetResData(BigMapResData resData)
         {
-            m_MapResData = resData;
+            MapResData = resData;
 
             var color = BigMapColor.GetColor(resData);
             if (color != Color.clear)
@@ -39,7 +41,7 @@ namespace Game.Map.Entity
 
         public void OnClick()
         {
-            DLog.Log($"坐标:<{m_Cx},{m_Cy}>, {m_MapResData}");
+            DLog.Log($"坐标:<{Cx},{Cy}>, {MapResData}");
         }
 
         public void AddEntity(BigMapEntity e)
@@ -54,7 +56,7 @@ namespace Game.Map.Entity
 
         public void SetInteractive(bool on)
         {
-            
+            subSprite.color = on ? System.Drawing.Color.Khaki.ToUnityColor() : Color.black;
         }
     }
 }

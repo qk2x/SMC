@@ -10,6 +10,7 @@ namespace Game.Resource.ResItem
         [SerializeField] private Image img;
         [SerializeField] private TextMeshProUGUI text;
 
+        [SerializeField] private bool autoUpdateCountFromResManager;
         private void OnEnable()
         {
             if (resType != ResType._)
@@ -36,6 +37,14 @@ namespace Game.Resource.ResItem
                 text.text = count.ToString();
                 count = c;
             }
+        }
+
+        public void Set(ResType rt, int c)
+        {
+            autoUpdateCountFromResManager = false;
+            
+            SetColor(rt);
+            text.text = c.ToString();
         }
 
         void Update()

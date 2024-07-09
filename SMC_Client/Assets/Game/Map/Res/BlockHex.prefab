@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testTxt: {fileID: 4277155318649237057}
   mainSprite: {fileID: 4832711850724961690}
+  subSprite: {fileID: 7467303020631286367}
 --- !u!60 &3424375370319483521
 PolygonCollider2D:
   m_ObjectHideFlags: 0
