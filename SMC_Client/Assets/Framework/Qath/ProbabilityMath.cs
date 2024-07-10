@@ -17,7 +17,7 @@ namespace Framework.Qath
 		/// <param name="min"></param>
 		/// <param name="max"></param>
 		/// <returns></returns>
-		public static float RandomFloat(float min, float max)
+		public static float RandomFloat(float min = 0f, float max = 1f)
 		{
 			return _rand.NextFloat(min, max);
 		}

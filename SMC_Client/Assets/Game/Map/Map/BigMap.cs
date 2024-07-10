@@ -3,6 +3,7 @@ using Framework.BUI;
 using Framework.Misc;
 using Framework.Qath;
 using Game.Map.Entity;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -162,7 +163,6 @@ namespace Game.Map
 				adjacent.Add(hex);
 			}
 		}
-
 
 	}
 }

@@ -7,6 +7,13 @@ namespace Game.Map.Entity
 {
     public class BigMapHexagon : BigMapEntity
     {
+        public enum SolarSystem
+        {
+            Normal,
+            Obstacle,
+            Gate,
+        }
+        
         [SerializeField] private TextMeshPro testTxt;
         [SerializeField] private SpriteRenderer mainSprite;
         [SerializeField] private SpriteRenderer subSprite;
@@ -15,8 +22,19 @@ namespace Game.Map.Entity
         public int Cx { get; private set; }
         public int Cy { get; private set; }
         
+        public SolarSystem SystemType { get; private set; }
+        
         public BigMapResData MapResData { get; private set; }
         public bool IsInteractive { get; private set; }
+
+        public void SetSolarSystemType(SolarSystem type)
+        {
+            SystemType = type;
+            if (type == SolarSystem.Obstacle)
+            {
+                mainSprite.color = Color.black;
+            }
+        }
         
         public void SetCoordinate(int x, int y)
         {

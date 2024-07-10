@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Framework.Misc;
+using Framework.Qath;
 using Game.Map.Entity;
+using Unity.Collections;
 using UnityEngine;
 
 namespace Game.Map
@@ -75,14 +77,38 @@ namespace Game.Map
                 Quaternion.identity, transform);
             
             hex.SetCoordinate(x, y);
-            hex.SetResData(BigMap.RandomBigMapResData());
+            if (ProbabilityMath.RandomFloat() > 0.7f)
+            {
+                hex.SetSolarSystemType(BigMapHexagon.SolarSystem.Obstacle);
+            }
+            else
+            {
+                hex.SetResData(BigMap.RandomBigMapResData());
+            }
+
             hex.SetInteractive(false);
             
             hexMap.Add(new ValueTuple<int, int>(x, y), hex);
         }
 
+        private bool m_MouseDown;
+        private Vector2 m_MouseDownPos;
+        
         void Update()
         {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (!m_MouseDown)
+                {
+                    m_MouseDown = true;
+                    m_MouseDownPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                }
+                else
+                {
+                    var newMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                }
+            }
+
             if (Input.GetMouseButtonUp(0))
             {
                 // 获取鼠标点击位置的世界坐标
