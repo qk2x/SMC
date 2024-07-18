@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Framework.Misc;
 using Framework.Qath;
 using Game.Map.Entity;
+using Game.Map.PathFinder;
+using Sirenix.OdinInspector;
 using Unity.Collections;
 using UnityEngine;
 
@@ -24,10 +26,20 @@ namespace Game.Map
             Instance = this;
         }
 
-        void Start()
+        [Button()]
+        public void Step(int step)
         {
-            CreateBigMap(10, 5);
-            CreateHq(0, 0);
+            PathFinder.PathFinder.FindLinked(BigMapMono.Instance.GetHexagonByCoordinate(0, 0), step);
+        }
+        
+        [Button()]
+        public void TestFindPath()
+        {
+            List<IPathFindableNode> path = new List<IPathFindableNode>();
+            
+            PathFinder.PathFinder.FindPath(
+                Instance.GetHexagonByCoordinate(0, 0), 
+                Instance.GetHexagonByCoordinate(-3, 2), path);
         }
 
         public void CreateHq(int x, int y)
@@ -149,8 +161,14 @@ namespace Game.Map
 
         public BigMapHexagon GetHexagonByCoordinate(int x, int y)
         {
-            hexMap.TryGetValue((x, y), out var hex);
-            return hex;
+            if (hexMap.TryGetValue((x, y), out var hex))
+            {
+                return hex;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

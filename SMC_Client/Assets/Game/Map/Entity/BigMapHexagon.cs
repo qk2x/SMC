@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using Framework.Misc;
+using Game.Map.PathFinder;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game.Map.Entity
 {
-    public class BigMapHexagon : BigMapEntity
+    public class BigMapHexagon : BigMapEntity, IPathFindableNode
     {
         public enum SolarSystem
         {
@@ -75,6 +77,46 @@ namespace Game.Map.Entity
         public void SetInteractive(bool on)
         {
             subSprite.color = on ? System.Drawing.Color.Khaki.ToUnityColor() : Color.black;
+        }
+
+        public void GetLinkedPathFindable(IList<IPathFindableNode> list)
+        {
+            list.AddRange(BigMap.Instance.GetLinked(this));
+        }
+
+        public PathFindableData m_PathFindableData;
+
+        public PathFindableData PathNodeData
+        {
+            get
+            {
+                if (m_PathFindableData == null)
+                {
+                    m_PathFindableData = new PathFindableData();
+                }
+
+                return m_PathFindableData;
+            }
+        }
+
+        void Update()
+        {
+            testTxt.gameObject.SetActive(true);
+            if (PathNodeData.Step != int.MaxValue)
+            {
+                testTxt.text = PathNodeData.Step.ToString() + $" ({Cx}, {Cy})";
+                testTxt.color = Color.green;
+            }
+            else
+            {
+                testTxt.text = $"({Cx}, {Cy})";;
+                testTxt.color = Color.red;
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"({Cx}, {Cy})-{PathNodeData.Step}";;
         }
     }
 }

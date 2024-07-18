@@ -3,6 +3,7 @@ using Framework.BUI;
 using Framework.Misc;
 using Framework.Qath;
 using Game.Map.Entity;
+using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -40,8 +41,14 @@ namespace Game.Map
 
 		void CreateBigMapMono()
 		{
-
+			BigMapMono.CreateBigMap(5, 5);
+			//BigMapMono.CreateHq(0, 0);
+			// PathFinder.PathFinder.FindPath(
+			// 	BigMapMono.Instance.GetHexagonByCoordinate(0, 0),
+			// 	BigMapMono.Instance.GetHexagonByCoordinate(3, 3));
 		}
+
+
 
 		public void OnHexClick(BigMapHexagon hex)
 		{
@@ -117,50 +124,99 @@ namespace Game.Map
 			}
 		}
 
+		private static List<BigMapHexagon> _tempList = new List<BigMapHexagon>();
+		public IList<BigMapHexagon> GetLinked(BigMapHexagon target)
+		{
+			_tempList.Clear();
+			GetLinked(target, _tempList);
+			return _tempList;
+		}
+		
 		/// <summary>
 		/// 当前逻辑下的6边型相邻格子
 		/// </summary>
 		/// <param name="target"></param>
 		/// <param name="adjacent"></param>
-		public void GetAdjacent(BigMapHexagon target, List<BigMapHexagon> adjacent)
+		public void GetLinked(BigMapHexagon target, IList<BigMapHexagon> adjacent)
 		{
 			var cx = target.Cx;
 			var cy = target.Cy;
 
-			var hex = BigMapMono.GetHexagonByCoordinate(cx + 1, cy);
-			if (hex != null)
+
+			if (math.abs(cx % 2) == 0)
 			{
-				adjacent.Add(hex);
-			}
+				var hex = BigMapMono.GetHexagonByCoordinate(cx + 1, cy);
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
 			
-			hex = BigMapMono.GetHexagonByCoordinate(cx -1, cy);
-			if (hex != null)
-			{
-				adjacent.Add(hex);
-			}
+				hex = BigMapMono.GetHexagonByCoordinate(cx -1, cy);
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
 			
-			hex = BigMapMono.GetHexagonByCoordinate(cx, cy + 1);
-			if (hex != null)
-			{
-				adjacent.Add(hex);
-			}
+				hex = BigMapMono.GetHexagonByCoordinate(cx, cy + 1);
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
 			
-			hex = BigMapMono.GetHexagonByCoordinate(cx, cy - 1);
-			if (hex != null)
-			{
-				adjacent.Add(hex);
+				hex = BigMapMono.GetHexagonByCoordinate(cx, cy - 1);
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
+				
+				hex = BigMapMono.GetHexagonByCoordinate(cx - 1, cy - 1);
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
+
+				hex = BigMapMono.GetHexagonByCoordinate(cx + 1, cy - 1);
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
 			}
-			
-			hex = BigMapMono.GetHexagonByCoordinate(cx + 1, cy - 1);
-			if (hex != null)
+			else
 			{
-				adjacent.Add(hex);
-			}
+				var hex = BigMapMono.GetHexagonByCoordinate(cx + 1, cy + 1);
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
 			
-			hex = BigMapMono.GetHexagonByCoordinate(cx - 1, cy - 1);
-			if (hex != null)
-			{
-				adjacent.Add(hex);
+				hex = BigMapMono.GetHexagonByCoordinate(cx -1, cy + 1);
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
+			
+				hex = BigMapMono.GetHexagonByCoordinate(cx, cy + 1);
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
+			
+				hex = BigMapMono.GetHexagonByCoordinate(cx, cy - 1);
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
+				hex = BigMapMono.GetHexagonByCoordinate(cx - 1, cy );
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
+
+				hex = BigMapMono.GetHexagonByCoordinate(cx + 1, cy);
+				if (hex != null)
+				{
+					adjacent.Add(hex);
+				}
 			}
 		}
 
