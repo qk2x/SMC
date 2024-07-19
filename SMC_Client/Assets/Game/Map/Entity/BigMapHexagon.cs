@@ -25,8 +25,10 @@ namespace Game.Map.Entity
         public int Cy { get; private set; }
         
         public SolarSystem SystemType { get; private set; }
+
+        public BigMapResData MapResData;
+        public HexHexShaft HexShaft { get; private set; }
         
-        public BigMapResData MapResData { get; private set; }
         public bool IsInteractive { get; private set; }
 
         public void SetSolarSystemType(SolarSystem type)
@@ -59,6 +61,17 @@ namespace Game.Map.Entity
             }
         }
 
+        /// <summary>
+        /// 在地图块上加矿井
+        /// </summary>
+        /// <param name="mapStruct"></param>
+        public HexHexShaft FormShaft()
+        {
+            HexShaft = new HexHexShaft(this) { Type = HexStructType.Shaft };
+            
+            return HexShaft;
+        }
+
         public void OnClick()
         {
             DLog.Log($"坐标:<{Cx},{Cy}>, {MapResData}");
@@ -85,6 +98,7 @@ namespace Game.Map.Entity
         }
 
         public PathFindableData m_PathFindableData;
+
 
         public PathFindableData PathNodeData
         {

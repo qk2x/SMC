@@ -4,6 +4,7 @@ using Framework.BUI;
 using Game.Map.Entity;
 using Game.Map.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Map
 {
@@ -11,14 +12,14 @@ namespace Game.Map
 	public class UIBigMap : UIBase
 	{
 		[SerializeField] private UIHexagonMineInfo hexagonMineInfo;
-		
+		[SerializeField] private Button formMiningTeamBtn;
 		protected override void OnShow()
 		{
 			base.OnShow();
 		}
 
 		private Tween m_MineInfoTween;
-		public void ShowHexagonInfo(BigMapHexagon hexagon)
+		public void ShowHexagonResourcesInfo(BigMapHexagon hexagon)
 		{
 			m_MineInfoTween?.Kill();
 			
@@ -29,12 +30,19 @@ namespace Game.Map
 			hexagonMineInfo.SetMapHexagon(hexagon);
 		}
 
-		public void HideHexagonInfo()
+		public void HideHexagonResourcesInfo()
 		{
 			m_MineInfoTween?.Kill();
 			RectTransform rt = (RectTransform)hexagonMineInfo.transform;
 			//rt.anchoredPosition = new Vector2(330, rt.anchoredPosition.y);
 			m_MineInfoTween = rt.DOAnchorPos(new Vector2(330, rt.anchoredPosition.y), (350 - rt.anchoredPosition.x) / 330f * 0.5f, true);
+		}
+
+		public void OnFormMiningTeam()
+		{
+			formMiningTeamBtn.gameObject.SetActive(false);
+			
+			
 		}
 	}
 }

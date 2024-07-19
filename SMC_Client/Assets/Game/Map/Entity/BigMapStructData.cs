@@ -1,15 +1,19 @@
 ﻿namespace Game.Map.Entity
 {
-	public enum BigMapStructType
+	public enum HexStructType
 	{
 		/// <summary>
 		/// 存储物资，并可以分发
 		/// </summary>
 		Warehouse,
+		/// <summary>
+		/// 矿井
+		/// </summary>
+		Shaft,
 	}
 	
-	public struct BigMapStructData
+	public class HexStruct : HexEntity
 	{
-		
+		public HexStructType Type;
 	}
 }

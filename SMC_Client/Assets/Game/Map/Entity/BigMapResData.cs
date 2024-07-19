@@ -31,10 +31,6 @@ namespace Game.Map.Entity
 			return 0;
 		}
 
-
-
-
-
 		public override string ToString()
 		{
 			return $"S:{Ms}, A:{Ma}, B:{Mb}";

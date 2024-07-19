@@ -3,7 +3,6 @@ using Framework.BUI;
 using Framework.Misc;
 using Framework.Qath;
 using Game.Map.Entity;
-using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -23,6 +22,8 @@ namespace Game.Map
 		public BigMapHexagon CurInteractive { get; private set; }
 
 		public BigMapMono BigMapMono;
+		
+		private List<HexHexShaft> m_Shafts = new List<HexHexShaft>();
 
 		public void InitBigMap()
 		{
@@ -62,11 +63,11 @@ namespace Game.Map
 				CurInteractive = hex;
 				hex.SetInteractive(true);
 
-				BigMapUI.ShowHexagonInfo(hex);
+				BigMapUI.ShowHexagonResourcesInfo(hex);
 			}
 			else
 			{
-				BigMapUI.HideHexagonInfo();
+				BigMapUI.HideHexagonResourcesInfo();
 			}
 		}
 
@@ -220,5 +221,22 @@ namespace Game.Map
 			}
 		}
 
+		public void FormMiningTeam()
+		{
+			m_Shafts.Add(CurInteractive.FormShaft());
+		}
+
+		void DoStep()
+		{
+			foreach (var shaft in m_Shafts)
+			{
+				
+			}
+		}
+
+		public void GetMine()
+		{
+			
+		}
 	}
 }
